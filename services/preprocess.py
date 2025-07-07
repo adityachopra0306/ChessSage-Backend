@@ -13,7 +13,7 @@ def preprocess_stats(stats):
 
 def preprocess_games(games_df, username):
     '''
-    Returns processed games DataFrame.
+    Returns a player-centric DataFrame with normalized columns, result labels, and opening names.
     '''
     def normalize_columns(df):
         white_df = pd.json_normalize(df['white'])
@@ -46,7 +46,7 @@ def preprocess_games(games_df, username):
             return None
 
     def normalize_by_user(df, player_id):
-        #print(df['white_@id'].value_counts())    
+
         df['player_color'] = (
             df['white_@id']
             .str.rsplit('/', n=1).str[-1]
@@ -97,7 +97,7 @@ def preprocess_games(games_df, username):
         
         df['result'] = df.apply(get_result, axis=1)
         
-        df = df[df['rules'] == 'chess']
+        df = df[df['rules'] == 'chess'].copy()
 
         cols_to_drop = [col for col in df.columns if col.startswith('white_') or col.startswith('black_')]
         cols_to_drop.extend(['rules', 'tcn', 'uuid', 'white_uuid', 'black_uuid', 'start_time', 'tournament', 'initial_setup'])

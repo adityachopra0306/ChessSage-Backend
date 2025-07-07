@@ -22,7 +22,7 @@ This project powers the backend for **ChessSage**, an intelligent chess analytic
   - Analysis of played games and profile statistics
   - Prompt generation for Gemini
   - Game evaluation
-- `scripts/`: Local test scripts for verifying logic before full router integration
+- `scripts/`: Module-level Integration Testing scripts for verifying logic before full router integration
 
 ---
 
@@ -40,7 +40,8 @@ This project powers the backend for **ChessSage**, an intelligent chess analytic
 ## Project Structure
 
 ```
-sage-backend  
+sage-backend
+├── routers/    
 ├── scripts/  
 │   ├── test_chess_api.py  
 │   ├── test_gemini_api.py  
@@ -62,4 +63,4 @@ sage-backend
 ```
 
 ## License
-This project is licensed under the MIT License.
+This project is licensed under the MIT License. See the [License File](./LICENSE) for details.

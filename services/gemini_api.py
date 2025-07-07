@@ -34,7 +34,7 @@ def format_mode(mode_name, info):
         f"    Latest Game played on {latest_game_date}\n"
     )
 
-def generate_prompt(player_profile, basic_stats, tone, background, length, num_days):
+def generate_basic_stats_prompt(player_profile, basic_stats, tone, background, length, num_days):
     today_str = date_to_words(date.today())
     time_window = num_days_to_words(num_days)
 
