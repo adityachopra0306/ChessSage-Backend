@@ -2,7 +2,7 @@
 
 ![status](https://img.shields.io/badge/status-WIP-yellow)
 ![python](https://img.shields.io/badge/python-3.10%2B-blue)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.115.1-teal?logo=fastapi)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.115.14-teal?logo=fastapi)
 ![Redis](https://img.shields.io/badge/Redis-Upstash-critical?logo=redis)
 ![Pandas](https://img.shields.io/badge/Pandas-2.3.0-lightgrey?logo=pandas)
 ![license](https://img.shields.io/badge/license-MIT-green)
