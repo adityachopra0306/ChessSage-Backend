@@ -119,6 +119,8 @@ uvicorn main:app --reload
 | `python-chess`     | Chess PGN parsing and board logic                 |
 | `google-genai`     | Gemini LLM integration                            |
 
+---
+
 ## Testing Scripts
 
 The `scripts/` directory contains standalone scripts used to manually verify core modules before full router integration. These scripts test key functionality like data fetching, Gemini prompting, and preprocessing.
@@ -162,6 +164,7 @@ sage-backend
 |── requirements.txt
 └── LICENSE
 ```
+---
 
 ## License
 This project is licensed under the MIT License. See the [License File](./LICENSE) for details.
