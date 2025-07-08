@@ -11,7 +11,7 @@ A FastAPI-based backend powering **ChessSage** – a smart chess coaching assist
 
 **Note**: The backend is **not** production-ready. Major features, including routing for some components, are still being implemented.
 
-### The link to the **ChessSage** frontend can be found [here](https://github.com/adityachopra0306/ChessSage).
+> The link to the **ChessSage** frontend can be found [here](https://github.com/adityachopra0306/ChessSage).
 
 ---
 
