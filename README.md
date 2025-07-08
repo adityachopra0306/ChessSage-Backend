@@ -31,6 +31,7 @@ A FastAPI-based backend powering **ChessSage** – a smart chess coaching assist
   - Setting and retrieving user configuration
   - Fetching Chess.com profile, stats, and games
   - Generating basic and per-mode detailed statistics 
+- `state/`: Contains Redis integration for user session cache **( See [user_state.py](state/user_state.py) )**
 - `scripts/`: Module-level Integration Testing scripts for verifying logic before full router integration
 
 ---
@@ -158,7 +159,9 @@ sage-backend
 ├── utils/  
 │   ├── api_utils.py  
 │   ├── testing_utils.py  
-│   └── utils.py  
+│   └── utils.py
+├── state/ 
+│   ├── user_state.py 
 ├── main.py  
 ├── README.md  
 |── requirements.txt
