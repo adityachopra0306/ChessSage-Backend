@@ -9,7 +9,6 @@ async def make_request(url: str, request: Request) -> Dict:
     response.raise_for_status()
     return response.json()
     
-
 async def get_profile(username: str, request: Request) -> Dict:
     url = f"https://api.chess.com/pub/player/{username}"
     return await make_request(url, request)
@@ -55,4 +54,3 @@ async def get_games(username: str, num_days: int, request: Request) -> List[Dict
                     recent_games.append(game)
 
     return sorted(recent_games, key=lambda g: g["end_time"], reverse=True)
-

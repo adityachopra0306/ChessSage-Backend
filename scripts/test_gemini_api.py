@@ -1,5 +1,5 @@
 import asyncio
-from services.gemini_api import generate_basic_stats_prompt
+from services.prompting import generate_basic_stats_prompt
 from utils.api_utils import select_key, prompt_gemini
 from .test_get_stats import test_get_basic_stats
 from .test_preprocess import test_preprocess_profile

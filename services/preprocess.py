@@ -119,4 +119,8 @@ def preprocess_games(games_df, username):
 
 def split_by_mode(games_df):
     modes = ['rapid', 'bullet', 'blitz', 'daily']
-    return {mode: games_df[games_df['time_class'] == mode].reset_index(drop=True) for mode in modes}
+    res = {}
+    for mode in modes:
+        val = games_df[games_df['time_class'] == mode].reset_index(drop=True).convert_dtypes()
+        res[mode] = val.to_dict(orient='records')
+    return res

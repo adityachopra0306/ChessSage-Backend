@@ -1,5 +1,6 @@
 import pandas as pd
 import re
+from utils.utils import sanitize_numpy_types
 
 def get_basic_stats(games, player_stats):
     
@@ -26,40 +27,31 @@ def get_basic_stats(games, player_stats):
             "date": player_stats[f'chess_{mode_key}']['last']['date'],
         }
 
-        
-        best_data = player_stats.get(f'chess_{mode_key}', {}).get('best', {})
         if not game_df.empty:
             stats["best"] = {
-                "rating": game_df['player_rating'].max(),
+                "rating": int(game_df['player_rating'].max()),
                 "date": game_df.loc[game_df['player_rating'].idxmax(), 'end_time']
             }
-        else:
-            stats['best'] = None
-
-        if not game_df.empty:
             stats["first_game"] = {
-                "rating": game_df.iloc[-1]['player_rating'],
+                "rating": int(game_df.iloc[-1]['player_rating']),
                 "date": game_df.iloc[-1]['end_time'],
                 "game": game_df.iloc[-1]['url']
             }
-        else:
-            stats["first_game"] = None
-
-        if not game_df.empty:
             stats["latest_game"] = {
-                "rating": game_df.iloc[0]['player_rating'],
+                "rating": int(game_df.iloc[0]['player_rating']),
                 "date": game_df.iloc[0]['end_time'],
                 "game": game_df.iloc[0]['url']
             }
         else:
+            stats['best'] = None
             stats["first_game"] = None
-
+            stats["latest_game"] = None
 
         rated_wins = game_df[(game_df['result'].str.contains('win')) & (game_df['rated'] == True)]
         if not rated_wins.empty:
             best_idx = rated_wins['opponent_rating'].idxmax()
             stats["best_game"] = {
-                "rating": game_df.loc[best_idx, 'player_rating'],
+                "rating": int(game_df.loc[best_idx, 'player_rating']),
                 "date": game_df.loc[best_idx, 'end_time'],
                 "game": game_df.loc[best_idx, 'url']
             }
@@ -187,6 +179,7 @@ def get_winloss_stats(games, mode_key):
             res["loss"][result] = count
         else:
             res["draw"][result] = count
+    
     return res
 
 def get_progress_stats(games, mode_key):
@@ -217,8 +210,8 @@ def get_progress_stats(games, mode_key):
     return res
 
 def get_detailed_stats(games, mode_key):
-    return {
+    return sanitize_numpy_types({
         "opening": get_opening_stats(games, mode_key),
         "win_loss": get_winloss_stats(games, mode_key),
         "progression": get_progress_stats(games, mode_key)
-    }
+    })

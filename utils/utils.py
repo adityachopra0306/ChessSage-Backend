@@ -1,4 +1,5 @@
 from datetime import datetime
+import numpy as np
 
 def safe_get(d, *keys, default="unknown"):
     for key in keys:
@@ -55,3 +56,21 @@ def date_to_words(given_date):
     
     date_in_words = f"{day} {month} {year}"
     return date_in_words
+
+def sanitize_numpy_types(obj):
+    if isinstance(obj, dict):
+        return {k: sanitize_numpy_types(v) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [sanitize_numpy_types(v) for v in obj]
+    elif isinstance(obj, tuple):
+        return tuple(sanitize_numpy_types(v) for v in obj)
+    elif isinstance(obj, np.integer):
+        return int(obj)
+    elif isinstance(obj, np.floating):
+        return float(obj)
+    elif isinstance(obj, np.bool_):
+        return bool(obj)
+    elif isinstance(obj, np.ndarray):
+        return obj.tolist()
+    else:
+        return obj

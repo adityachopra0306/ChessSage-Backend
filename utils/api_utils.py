@@ -1,6 +1,6 @@
 import os
 import random
-import google.generativeai as genai
+from google import genai
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -18,22 +18,30 @@ def select_key(user_key = None):
     
     return random.choice(keys)
 
-def check_key(key):
-    genai.configure(api_key=key)
+async def check_key(key):
+    if not key:
+        return {"valid": False, "error": 'No key provided'}
+    
+    client = genai.Client(api_key = key)
 
     try:
-        genmodel = genai.GenerativeModel("gemini-2.0-flash")
-        genmodel.generate_content("ping")
-        return {"valid": True, "error": None}
+        response = await client.aio.models.generate_content(
+    model='gemini-2.0-flash', contents='ping'
+    )
+        return {"valid": True, "response": response.text.strip()}
     except Exception as e:
         return {"valid": False, "error": str(e)}
     
-def prompt_gemini(prompt, key):
-    genai.configure(api_key=key)
+async def prompt_gemini(prompt, key):
+    if not key:
+        return {"valid": False, "error": 'No key provided'}
+    
+    client = genai.Client(api_key = key)
 
     try:
-        genmodel = genai.GenerativeModel("gemini-2.0-flash")
-        content = genmodel.generate_content(prompt).text.strip()
-        return {"valid": True, "result": content}
+        response = await client.aio.models.generate_content(
+    model='gemini-2.0-flash', contents = prompt
+    )
+        return {"valid": True, "response": response.text.strip()}
     except Exception as e:
         return {"valid": False, "error": str(e)}
